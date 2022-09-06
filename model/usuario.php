@@ -1,6 +1,6 @@
 <?php
 
-include "conexion.php";
+include "conexión.php";
 
 class usuario{
 
