@@ -7,17 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS v5.0.2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="icon" href="background/logo.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="scss/estilos.css">
+    <link rel="stylesheet" href="scss/custom.css">
   </head>
 
   <style>
 
       body{
         background: #ffffff;
-        background: linear-gradient(to right, #f5ea8a,#ffffff);
+        background: linear-gradient(to right, #f7f2c6,#e7bb2a);
       }
 
       .bg{
@@ -50,7 +47,7 @@
               <div class="col-8">
               <div class="col-8">
                 <h1 class="text-center">BIENVENIDO</h2>
-                    <h1 class="text-center">ENCUESTA SOCIAL</h2>
+                    <h1 class="text-center text-primary">ENCUESTA SOCIAL</h2>
               </div>
               </div>
               
@@ -60,13 +57,11 @@
 
               <form class="p-4" method="POST" action="loginp.php">
                     <div class="mg-3">
-                        <label class="form-label fs-4">Número de documento:</label>
-                        <input type="number" class="form-control" name="ndocumento" autofocus required>
+                        <input type="number"  placeholder="Número de documento" class="form-control" name="ndocumento" autofocus required>
                     </div>
-
+                    <p></p>
                     <div class="mg-3  fs-4">
-                        <label class="form-label">Contraseña:</label>
-                        <input type="text" class="form-control" name="contraseña" autofocus required>
+                        <input type="text" class="form-control" placeholder="Contraseña" name="contraseña" autofocus required>
                     </div>
 
                     <div>
@@ -78,13 +73,13 @@
                     <div class="form-footer">
                       <div class="d-grid">
                         <input type="hidden" name="submit" value="1">
-                        <input type="submit" class="btn btn-primary text-white fs-4" value="Ingresar">
+                        <input type="submit" class="btn btn-primary text-white fs-4" value="Iniciar Sesión">
                     </div>
                     </div>
                     <div class="my-3">
-                        <span>¿No tienes cuenta? <a href="pestañas/registrarp.php">Registrarse</a></span>
+                        <span>¿No tienes cuenta? <a href="vista/usuario/registrar_usuario.html">Registar Usuario</a></span>
                         <p></p>
-                        <span>¿Haz olvidado la contraseña? <a href="">Recuperar Contraseña</a></span>
+                        
                     </div>
                 </form>
 
@@ -97,12 +92,6 @@
 
 
 
-
-
-<section class="w-50 mx-auto text-center pt-5" id="intro">
-  <h1 class="p-3 fs-3 border-top border-3">Bienvenidos a <span class="text-primary">Encuesta Social</span></h1>
-  <p class="p-3 fs-5"><span class="text-primary">Nosotros</span> estaremos para tí</p>
-</section>
 
 
 
