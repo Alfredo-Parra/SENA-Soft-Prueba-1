@@ -34,11 +34,11 @@ class usuario{
             $resultado = $inicio->fetchAll(PDO::FETCH_OBJ);
 
             $contador = count($resultado);
-    
+
           if($contador == 1){
               header ('Location: ../../vista/usuario/crear_usuario.html');
            }else{
-                header ('Location: login.php?mensaje=error');
+                header ('Location: index.html?mensaje=error');
            }
         }
 
@@ -50,7 +50,7 @@ class usuario{
         $resultado = $registro->execute([$documento,$contraseña]);
 
       if($resultado === TRUE){
-          header ('Location: ../login.php');
+          header ('Location: ../index.html');
        }
     }
 

@@ -14,3 +14,5 @@ try {
 } catch (Exception $e) {
 	echo "Problema con la conexion: " . $e->getMessage();
 }
+
+?>
