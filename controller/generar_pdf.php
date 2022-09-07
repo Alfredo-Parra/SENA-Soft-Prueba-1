@@ -48,24 +48,46 @@ class PDF extends FPDF
 
 }
 
-// Creación del objeto de la clase heredada
-$pdf = new PDF();
-$pdf->AddPage();
+// Validación de datos enviados
+  if (!empty($_POST)) {
+    if (isset($_POST["radicado"]) && isset($_POST["nombre"]) && isset($_POST["documento"]) && isset($_POST["ndocumento"]) && isset($_POST["tema"]) && isset($_POST["fechaSondeo"]) && isset($_POST["fechaCreacion"])) {
+      // Declaración de variables
+      $radicado = $_POST["radicado"];
+      $nombre = $_POST["nombre"];
+      $documento = $_POST["documento"];
+      $ndocumento = $_POST["ndocumento"];
+      $tema = $_POST["tema"];
+      $fechaSondeo = $_POST["fechaSondeo"];
+      $fechaCreacion = $_POST["fechaCreacion"];
 
-// Configuración del documento
-$pdf->SetTitle(utf8_decode('Certificado de Participación'));
-$pdf->SetAuthor('SONDEOS OPINIÓN CIUDADANA');
-$pdf->SetCreator('Alfredo Parra, Josep Jacome');
+      if ($radicado != "" && $nombre != "" && $documento != "" && $ndocumento != "" && $tema != "" && $fechaSondeo != "" && $fechaCreacion != "") {
 
-// Agregar contenido
-$pdf->setTitulo('Certificado de Participación');
-$pdf->setTexto('La presente entidad encargada del proceso de recolección de información a través de sondeos de opinión ciudadana, hace constar que el ciudadano(a):');
-$pdf->setSubTitulo('NOMBRE USUARIO'.' identificado(a) con:');
-$pdf->setSubTitulo('TIPO DOCUMENTO'.' No. '.'NUMERO DOCUMENTO');
-$pdf->setTexto('Participó en el sondeo de opinión ciudadana '.'Nombre_Sondeo'.' realizado el día: '.'2021-05-05');
-$pdf->setTexto('Este certificado se expide a solicitud del interesado el día: '.'2021-05-05');
+        // Creación del objeto de la clase heredada
+        $pdf = new PDF();
+        $pdf->AddPage();
+        // Configuración del documento
+        $pdf->SetTitle(utf8_decode('Certificado de Participación'));
+        $pdf->SetAuthor('SONDEOS OPINIÓN CIUDADANA');
+        $pdf->SetCreator('Alfredo Parra, Josep Jacome');
 
-// Archivo de salida
-$pdf->Output('','Certificado.pdf');
+        // Agregar contenido
+        $pdf->setTitulo('Certificado de Participación');
+        $pdf->setSubTitulo('Id Radicado: '.$radicado);
+        $pdf->setTexto('La presente entidad encargada del proceso de recolección de información a través de sondeos de opinión ciudadana, hace constar que el ciudadano(a):');
+        $pdf->setSubTitulo($nombre.' identificado(a) con:');
+        $pdf->setSubTitulo($documento.' No. '.$ndocumento);
+        $pdf->setTexto('Participó en el sondeo de opinión ciudadana '.$tema.' realizado el día: '.$fechaSondeo);
+        $pdf->setTexto('Este certificado se expide a solicitud del interesado el día: '. $fechaCreacion);
 
+        // Archivo de salida
+        $pdf->Output('','Certificado.pdf');
+      } else {
+        echo "Ocurrió un error, los campos no pueden llegar vacíos";
+      }
+    } else {
+      echo "Ocurrió un error, algunos campos no se recibieron";
+    }
+  } else {
+    echo "Ocurrió un error, no se recibieron los datos";
+  }
 ?>
