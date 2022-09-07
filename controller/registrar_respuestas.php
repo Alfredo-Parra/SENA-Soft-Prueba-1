@@ -19,6 +19,8 @@
 
     }
 
-    
+    header ('Location: ../vista/usuuario/principal_usuario.html');
+
+
 
 ?>
