@@ -22,7 +22,11 @@ class usuario{
 
         if($user == 192837465 || $con == 1234){
 
-            print("cuenta admin");
+           include 'administrador.php';
+
+           $administrador = new administrador();
+
+           $administrador->iniciar_sesión($user,$con);
 
         }else{
 
