@@ -10,7 +10,7 @@ class PDF extends FPDF
   function setTitulo($text)
   {
     // Establecer espacio superior
-    $this->Ln(10);
+    $this->Ln(20);
     // Establecer fuente
     $this->SetFont($this->fontName,'B',20);
     // Movernos a la derecha
@@ -18,12 +18,12 @@ class PDF extends FPDF
     // Título
     $this->Cell(30, 10, utf8_decode($text),0,0,'C');
     // Salto de línea
-    $this->Ln(30);
+    $this->Ln(25);
   }
 
   function setSubTitulo($text)
   {
-    $this->SetFont($this->fontName,'B',18);
+    $this->SetFont($this->fontName,'B',14);
     // Movernos a la derecha
     $this->Cell(80);
     // Subtítulo
@@ -34,6 +34,9 @@ class PDF extends FPDF
 
   function setTexto($text)
   {
+    // Salto de línea
+    $this->Ln();
+    // Establecer fuente
     $this->SetFont($this->fontName,'',14);
     // Movernos a la derecha
     $this->Cell(10);
@@ -56,7 +59,11 @@ $pdf->SetCreator('Alfredo Parra, Josep Jacome');
 
 // Agregar contenido
 $pdf->setTitulo('Certificado de Participación');
-$pdf->setTexto('La presente entidad encargada del proceso de recolección de información a través de sondeos de opinión ciudadana, hace constar que el ciudadano:');
+$pdf->setTexto('La presente entidad encargada del proceso de recolección de información a través de sondeos de opinión ciudadana, hace constar que el ciudadano(a):');
+$pdf->setSubTitulo('NOMBRE USUARIO'.' identificado(a) con:');
+$pdf->setSubTitulo('TIPO DOCUMENTO'.' No. '.'NUMERO DOCUMENTO');
+$pdf->setTexto('Participó en el sondeo de opinión ciudadana '.'Nombre_Sondeo'.' realizado el día: '.'2021-05-05');
+$pdf->setTexto('Este certificado se expide a solicitud del interesado el día: '.'2021-05-05');
 
 // Archivo de salida
 $pdf->Output('','Certificado.pdf');
