@@ -82,12 +82,12 @@ class PDF extends FPDF
         // Archivo de salida
         $pdf->Output('','Certificado.pdf');
       } else {
-        echo "Ocurrió un error, los campos no pueden llegar vacíos";
+        echo "Ocurrió un error al generar el pdf, los campos no pueden llegar vacíos";
       }
     } else {
-      echo "Ocurrió un error, algunos campos no se recibieron";
+      echo "Ocurrió un error al generar el pdf, algunos campos no se recibieron";
     }
   } else {
-    echo "Ocurrió un error, no se recibieron los datos";
+    echo "Ocurrió un error al generar el pdf, no se recibieron los datos";
   }
 ?>
