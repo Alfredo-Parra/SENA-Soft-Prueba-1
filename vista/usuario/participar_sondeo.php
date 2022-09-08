@@ -38,7 +38,7 @@
             
     
             <div class="text-end">
-              <button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button>
+                <a href="../../controller/cerrar_sessión.php"> <button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button></a>
             </div>
           </div>
         </div>
@@ -54,9 +54,37 @@
                     $sondeo = $bd->query("select * from Creación_Sondeo where ID = $id;");
                     $r_sondeo = $sondeo->fetchAll(PDO::FETCH_OBJ);
 
-                    
-                    foreach($r_sondeo as $dato){
+                    $respuestas_usuario = $bd->query("select * from respuestas_usuario where ID_SONDEO = $id;");
+                    $c_respuestas_u = $respuestas_usuario->fetchAll(PDO::FETCH_OBJ);
 
+                    $c_r_u = count(($c_respuestas_u));
+
+                    if($c_r_u > 1){
+
+                        ?>
+<div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header fs-3 bg-primary text-light text-center">
+                        Lo sentimos ya has participado en la encuesta <i class="bi bi-emoji-frown"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Ya has registrado respuestas para esta encuesta</h5>
+                        <p class="card-text">Puedes ir a mirar que otras encuestas hay, gracias por su atención.</p>
+                        <a href="principal_usuario.php" class="btn btn-primary text-light">Ir a Inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<?php
+
+
+                    }else{
+                        foreach($r_sondeo as $dato){
                     
 
         ?>
@@ -161,6 +189,11 @@
             </div>
         </div>
     </div>
+
+    <?php 
+
+                    }
+    ?>
       
 
 </body>
