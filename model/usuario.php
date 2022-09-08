@@ -60,10 +60,24 @@ class usuario{
 
     }
 
-    
+
     public function buscar_certificado($radicado){
 
-        $certificado = $GLOBALS['bd']->query("SELECT id_usuario, id_sondeo FROM radicados where CONCAT(radicado, LPAD(id, 4, '0')) = $radicado");
+        $certificado = $GLOBALS['bd']->query("SELECT
+                                    CONCAT(radicados.radicado, LPAD(radicados.ID, 4, '0')) id_radicado,
+                                    usuario.`Nombres Completos` Nombres,
+                                    usuario.Apellidos Apellidos,
+                                    usuario.Tipo_Documento,
+                                    usuario.`Número de Documento` Número_Documento,
+                                    creación_sondeo.Tema,
+                                    radicados.`fecha_creación` Fecha_Radicado,
+                                    creación_sondeo.`Creación_Sondeo` Fecha_Sondeo
+                                FROM
+                                    radicados
+                                INNER JOIN creación_sondeo ON creación_sondeo.ID = radicados.id_sondeo
+                                INNER JOIN usuario ON usuario.`Número de Documento` = radicados.id_usuario
+                                WHERE
+                                    CONCAT(radicados.radicado, LPAD(radicados.ID, 4, '0')) = '$radicado;");
         $resultado = $certificado->fetchAll(PDO::FETCH_OBJ);
 
         // $contador = count($resultado);
