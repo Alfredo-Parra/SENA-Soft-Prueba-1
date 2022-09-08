@@ -58,6 +58,10 @@ class sondeo
 
   }
 
+  public function agregar_participación($id_sondeo,$id_usuario,$fecha){
+
+  }
+
   public function generar_reporte_sondeo($id_sondeo){
 
     $proceso = $GLOBALS['bd']->query("SELECT respuestas_preguntas_sondeo.Respuesta Respuestas_Opcionales,

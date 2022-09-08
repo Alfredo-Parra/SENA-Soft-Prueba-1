@@ -11,7 +11,10 @@ $field_values_array = $_REQUEST['field_name'];
 if(count($field_values_array) == 1){
 
     $sondeo = new sondeo();
-    $sondeo->añadir_pregunta($field_values_array[0],$_POST['oculto']);
+    $sondeo->añadir_pregunta($_POST['oculto'],$field_values_array[0]);
+
+    $IDENTIFICADOR = $GLOBALS['id'];
+    header("Location: ../vista/administrador/añadir_preguntas.php?ID=$IDENTIFICADOR");
     
 }else{
 
