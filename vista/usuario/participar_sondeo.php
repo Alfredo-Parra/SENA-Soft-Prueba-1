@@ -28,9 +28,9 @@
             </a>
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="principal_administrador.php" class="nav-link px-2 text-dark">Inicio</a></li>
-              <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Sondeos Participados</a></li>
-              <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
+              <li><a href="principal_usuario.php" class="nav-link px-2 text-dark">Inicio</a></li>
+              <li><a href="sondeos_participados.php" class="nav-link px-2 text-white">Sondeos Participados</a></li>
+              <li><a href="resultados_sondeos.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
               <li><a href="#" class="nav-link px-2 text-white">Verificar Datos</a></li>
               
             </ul>
@@ -54,12 +54,12 @@
                     $sondeo = $bd->query("select * from Creación_Sondeo where ID = $id;");
                     $r_sondeo = $sondeo->fetchAll(PDO::FETCH_OBJ);
 
-                    $respuestas_usuario = $bd->query("select * from respuestas_usuario where ID_SONDEO = $id;");
+                    $respuestas_usuario = $bd->query("select * from participación_sondeo where ID_SONDEO = $id AND ID_USUARIO = $user;");
                     $c_respuestas_u = $respuestas_usuario->fetchAll(PDO::FETCH_OBJ);
 
                     $c_r_u = count(($c_respuestas_u));
 
-                    if($c_r_u > 1){
+                    if($c_r_u >= 1){
 
                         ?>
 <div class="container mt-5">

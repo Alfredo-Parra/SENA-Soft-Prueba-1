@@ -58,7 +58,7 @@
         $user = new usuario();
         $user->agregar_participación($_POST['oculto'],$id_usuario,$fecha_actual);
     
-        header ('Location: ../vista/usuario/principal_usuario.html');
+        header ('Location: ../vista/usuario/principal_usuario.php');
 
        
 
