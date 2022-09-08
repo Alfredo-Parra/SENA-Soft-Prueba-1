@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-09-2022 a las 05:06:02
+-- Tiempo de generación: 08-09-2022 a las 15:36:40
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `encuesta social`
 --
+CREATE DATABASE IF NOT EXISTS `encuesta social` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `encuesta social`;
 
 -- --------------------------------------------------------
 
@@ -51,7 +53,7 @@ CREATE TABLE `creación_sondeo` (
   `fecha_inicio` datetime NOT NULL,
   `fecha_final` datetime NOT NULL,
   `Restricción` varchar(30) NOT NULL,
-  `Tema` varchar(30) NOT NULL
+  `Tema` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -59,7 +61,9 @@ CREATE TABLE `creación_sondeo` (
 --
 
 INSERT INTO `creación_sondeo` (`ID`, `Creación_Sondeo`, `fecha_inicio`, `fecha_final`, `Restricción`, `Tema`) VALUES
-(1, '2022-09-07 21:28:03', '2022-09-07 16:24:09', '2022-09-10 16:24:09', 'No', 'Prueba');
+(1, '2022-09-07 21:28:03', '2022-09-07 16:24:09', '2022-09-10 16:24:09', 'No', 'Prueba'),
+(2, '2022-09-07 21:13:49', '2022-09-07 23:12:37', '2022-09-08 16:12:37', 'no', 'Consideraciones manejo de la p'),
+(3, '2022-09-07 21:16:02', '2022-09-07 23:12:37', '2022-09-08 16:12:37', 'no', 'Consideraciones manejo de la pandemia');
 
 -- --------------------------------------------------------
 
@@ -78,7 +82,8 @@ CREATE TABLE `inicio_sesión` (
 
 INSERT INTO `inicio_sesión` (`Número_Documento`, `Contraseña`) VALUES
 (1092337120, '221826'),
-(122111, 'A0221826');
+(122111, 'A0221826'),
+(1117540562, '12345');
 
 -- --------------------------------------------------------
 
@@ -99,7 +104,30 @@ CREATE TABLE `pregunta_sondeo` (
 INSERT INTO `pregunta_sondeo` (`ID`, `ID_SONDEO`, `Pregunta`) VALUES
 (1, 1, '¿Te gusta cómo está quedando?'),
 (2, 1, '¿Qué te pareció el evento?'),
-(3, 1, 'Azul o Rojo');
+(3, 1, 'Azul o Rojo'),
+(4, 3, '¿Que percepción tiene del manejo de la pandemia?'),
+(5, 3, '¿Está satisfecho con la acciones tomadas por el gobierno?');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `radicados`
+--
+
+CREATE TABLE `radicados` (
+  `ID` int(11) NOT NULL,
+  `radicado` varchar(15) NOT NULL DEFAULT 'RAD-',
+  `id_sondeo` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `fecha_creación` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `radicados`
+--
+
+INSERT INTO `radicados` (`ID`, `radicado`, `id_sondeo`, `id_usuario`, `fecha_creación`) VALUES
+(1, 'RAD-', 3, 1117540562, '2022-09-08');
 
 -- --------------------------------------------------------
 
@@ -122,7 +150,9 @@ INSERT INTO `respuestas_preguntas_sondeo` (`ID`, `ID_Pregunta`, `Respuesta`) VAL
 (2, 1, 'No'),
 (3, 1, 'Tal vez'),
 (4, 3, 'Azul'),
-(5, 3, 'Rojo');
+(5, 3, 'Rojo'),
+(6, 5, 'Si'),
+(7, 5, 'No');
 
 -- --------------------------------------------------------
 
@@ -145,7 +175,12 @@ CREATE TABLE `respuestas_usuario` (
 INSERT INTO `respuestas_usuario` (`ID`, `ID_SONDEO`, `ID_USUARIO`, `ID_Pregunta`, `Respuesta`) VALUES
 (8, 1, 1092337120, 1, 'Tal vez'),
 (9, 1, 1092337120, 2, 'Pastel'),
-(10, 1, 1092337120, 3, 'Rojo');
+(10, 1, 1092337120, 3, 'Rojo'),
+(11, 3, 122111, 4, 'Si bien nuestra generación no había experiementado'),
+(13, 3, 122111, 5, 'Si'),
+(19, 3, 1092337120, 5, 'No'),
+(20, 3, 1092337120, 4, 'Jujujujuj'),
+(21, 3, 1117540562, 5, 'No');
 
 -- --------------------------------------------------------
 
@@ -181,7 +216,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`Tipo_Documento`, `Número de Documento`, `Nombres Completos`, `Apellidos`, `Sexo`, `Teléfono_Celular`, `Teléfono_Fijo`, `Correo_Electrónico`, `Municipio`, `Dirección`, `Barrio-Vereda`, `Fecha_Nacimiento`, `Etnia`, `Condición_Discapacidad`, `Estrato_Residencia`, `U_Nivel_Educativo`, `Acceso_Dispositivos_E`, `Dispositivos_Tecnológicos`, `Conectividad_Internet`) VALUES
 ('Cédula de ciudadanía', 122111, 'Daniel', 'C', 'Hombre', 3214456148, 5708490, 'jdjacome02@gmail.com', 'Norte', 'Calle 4 # 15-62', 'Turbay', '2004-03-25', 's', 's', 1, 'Bachillerato', 'no', 0, 'si'),
-('Cédula de ciudadanía', 1092337120, 'Josep', 'Jacome', 'Hombre', 3214456148, 5708490, 'jdjacome02@gmail.com', 'Norte', 'Calle 4 # 15-62', 'Turbay', '2004-04-25', 'NO', 'NO', 1, 'Bachillerato', 'no', 0, 'si');
+('Cédula de ciudadanía', 1092337120, 'Josep', 'Jacome', 'Hombre', 3214456148, 5708490, 'jdjacome02@gmail.com', 'Norte', 'Calle 4 # 15-62', 'Turbay', '2004-04-25', 'NO', 'NO', 1, 'Bachillerato', 'no', 0, 'si'),
+('Cédula de ciudadanía', 1117540562, 'Luis Alfredo', 'Parra Jorge', 'Hombre', 234234, 423423, 'luisalfredo@hotmail.com', 'Bogotá', 'Calle 90', 'Suba - Quirigua', '1995-09-20', 'Akanamejoi', 'Ninguna', 2, 'Educación Superior', 'si', 0, 'si');
 
 --
 -- Índices para tablas volcadas
@@ -213,6 +249,14 @@ ALTER TABLE `pregunta_sondeo`
   ADD KEY `pregunta` (`ID_SONDEO`);
 
 --
+-- Indices de la tabla `radicados`
+--
+ALTER TABLE `radicados`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_sondeo` (`id_sondeo`);
+
+--
 -- Indices de la tabla `respuestas_preguntas_sondeo`
 --
 ALTER TABLE `respuestas_preguntas_sondeo`
@@ -224,13 +268,11 @@ ALTER TABLE `respuestas_preguntas_sondeo`
 --
 ALTER TABLE `respuestas_usuario`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `ID_Pregunta` (`ID_Pregunta`),
   ADD KEY `ID_SONDEO` (`ID_SONDEO`),
   ADD KEY `ID_USUARIO` (`ID_USUARIO`),
-  ADD KEY `ID_Pregunta_2` (`ID_Pregunta`),
   ADD KEY `ID_SONDEO_2` (`ID_SONDEO`),
   ADD KEY `ID_USUARIO_2` (`ID_USUARIO`),
-  ADD KEY `ID_Pregunta_3` (`ID_Pregunta`);
+  ADD KEY `ID_Pregunta` (`ID_Pregunta`);
 
 --
 -- Indices de la tabla `usuario`
@@ -246,25 +288,31 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `creación_sondeo`
 --
 ALTER TABLE `creación_sondeo`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_sondeo`
 --
 ALTER TABLE `pregunta_sondeo`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `radicados`
+--
+ALTER TABLE `radicados`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas_preguntas_sondeo`
 --
 ALTER TABLE `respuestas_preguntas_sondeo`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas_usuario`
 --
 ALTER TABLE `respuestas_usuario`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas
