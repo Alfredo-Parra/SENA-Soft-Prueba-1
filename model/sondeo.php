@@ -62,7 +62,7 @@ class sondeo
 
   }
 
-  public function generar_reporte_sondeo($id_sondeo){
+  public function generar_reporte($id_sondeo){
 
     $proceso = $GLOBALS['bd']->query("SELECT respuestas_preguntas_sondeo.Respuesta Respuestas_Opcionales,
                                           respuestas_preguntas_sondeo.ID_Pregunta ID_Pregunta,
