@@ -91,6 +91,14 @@ class usuario{
 
     }
 
+
+    public function agregar_participación($id_sondeo,$id_usuario,$fecha){
+
+        $proceso = $GLOBALS['bd']->prepare("INSERT INTO participación_sondeo (ID_SONDEO, ID_USUARIO, Fecha_Participación) VALUES (?,?,?)");
+        $resultado = $proceso->execute([$id_sondeo,$id_usuario,$fecha]);
+
+    }
+
 }
 
 

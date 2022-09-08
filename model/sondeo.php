@@ -63,8 +63,13 @@ class sondeo
 
   }
 
+  public function agregar_participación($id_sondeo,$id_usuario,$fecha){
+
+  }
+
 
 }
+
 
 
  

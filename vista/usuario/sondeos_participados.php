@@ -35,7 +35,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="principal_usuario.php" class="nav-link px-2 text-dark">Inicio</a></li>
           <li><a href="sondeos_participados.php" class="nav-link px-2 text-white">Sondeos Participados</a></li>
-          <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
+          <li><a href="resultados_sondeos.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Verificar Datos</a></li>
 
         </ul>
@@ -58,27 +58,16 @@
       
 
 
-
-       
-
-
-    <?php
+<?php
 
 include_once "../../model/conexión.php";
-$sondeo = $bd->query("select * from Creación_Sondeo");
+$sondeo = $bd->query("select * from participación_sondeo WHERE ID_USUARIO = $admin");
 $r_sondeo = $sondeo->fetchAll(PDO::FETCH_OBJ);
 
+
 foreach ($r_sondeo as $dato) {
-  date_default_timezone_set("America/Bogota");
-
-  $fecha_actual = date("Y-m-d H:i:00", time());
-  $fecha_inicio = $dato->fecha_inicio;
-  $fecha_final = $dato->fecha_final;
-
-  
-  if ($fecha_actual >= $fecha_inicio && $fecha_actual <= $fecha_final) {
-    $contador = count($r_sondeo);
-
+ 
+    
 
 ?>
 
@@ -86,40 +75,23 @@ foreach ($r_sondeo as $dato) {
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <div class="col">
         <div class="card">
-          <div class="card-header bg-primary text-light fs-4 text-center"><?php echo $dato->Tema ?></div>
+          <div class="card-header bg-primary text-light fs-4 text-center">Id Sondeo: <?php echo $dato->ID_SONDEO ?></div>
           <div class="card-body">
-            <p class="card-text text-center">Restricción: <?php echo $dato->Restricción ?></p>
+            <p class="card-text text-center">Identifiación de Usuario: <?php echo $dato->ID_USUARIO ?></p>
             <p class="text-center text-primary">-----------------------------</p>
-            <p class="card-text text-center">Fecha Inicio: <?php echo $dato->fecha_inicio ?></p>
-            <p class="text-center text-primary">-----------------------------</p>
-            <p class="card-text text-center">Fecha Final: <?php echo $dato->fecha_final ?></p>
-            <div class="card-footer bg-transparent border-primary text-end"><a href="participar_sondeo.php?ID=<?php echo $dato->ID ?>"><button class="btn btn-primary text-light">Participar</button></a></div>
+
+          
+            <div class="card-footer bg-transparent border-primary text-end"><a href="../../generar_pdf.php?ID=<?php echo $dato->ID ?>"><button class="btn btn-primary text-light">Generar Radicado</button></a></div>
           </div>
         </div>
       </div>
     </div>
-    <?php
-  }else{
-    ?>
-
-    <div class="col-md-6">
-            <div class="card">
-              <div class="card-header bg-primary text-center text-light fs-3">
-                No hay encuestas para tí en estos momentos
-              </div>
-              <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                  <p>Puedes esperar o revisar las encuestas que hayas realizado anteriormente</p>
-                  <footer class="blockquote-footer">ATT <cite title="Source Title">Encuesta Social</cite></footer>
-                </blockquote>
-              </div>
-            </div>
-      </div>
+   
 
 
   <?php
   }
-}
+
 
 
 ?>
