@@ -28,9 +28,9 @@ $GLOBALS['id'] = $_GET['ID'];
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="principal_administrador.php" class="nav-link px-2 text-dark">Inicio</a></li>
-              <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Sondeos Participados</a></li>
-              <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
+              <li><a href="principal_usuario.php" class="nav-link px-2 text-dark">Inicio</a></li>
+              <li><a href="sondeos_participados.php" class="nav-link px-2 text-white">Sondeos Participados</a></li>
+              <li><a href="resultados_sondeos.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
               <li><a href="#" class="nav-link px-2 text-white">Verificar Datos</a></li>
 
             </ul>

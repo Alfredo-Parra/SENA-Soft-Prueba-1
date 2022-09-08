@@ -100,7 +100,7 @@
                     <td><?php echo $dato->fecha_inicio; ?></td>
                     <td><?php echo $dato->fecha_final; ?></td>
                     <td><?php echo $dato->Restricción; ?></td>
-                    <td><a href=""><button class="btn btn-primary text-light">Generar</button></a></td>
+                    <td><a href="../../controller/generar_reporte.php?ID=<?php echo $dato->ID ?>"><button class="btn btn-primary text-light">Generar</button></a></td>
                   </tr>
 
                 <?php
