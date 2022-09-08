@@ -27,8 +27,8 @@
             </a>
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 text-dark">Inicio</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Crear Sondeo</a></li>
+              <li><a href="principal_administrador.php" class="nav-link px-2 text-dark">Inicio</a></li>
+              <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Crear Sondeo</a></li>
               <li><a href="#" class="nav-link px-2 text-white">Resultados Sondeo</a></li>
               
             </ul>
@@ -36,7 +36,7 @@
             
     
             <div class="text-end">
-              <button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button>
+             <a href="../../controller/cerrar_sessión.php"><button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button></a> 
             </div>
           </div>
         </div>
