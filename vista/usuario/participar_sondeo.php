@@ -1,21 +1,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../scss/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    
+
     <?php
 
-    session_start();
+session_start();
 
-    $user = $_SESSION['user'];
-    $GLOBALS['id'] = $_GET['ID'];
-    ?>
+$user = $_SESSION['user'];
+$GLOBALS['id'] = $_GET['ID'];
+?>
 
 </head>
 <body>
@@ -26,41 +26,40 @@
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
               <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             </a>
-    
+
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
               <li><a href="principal_administrador.php" class="nav-link px-2 text-dark">Inicio</a></li>
               <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Sondeos Participados</a></li>
               <li><a href="crear_sondeo.php" class="nav-link px-2 text-white">Resultados de Sondeos</a></li>
               <li><a href="#" class="nav-link px-2 text-white">Verificar Datos</a></li>
-              
+
             </ul>
-    
-            
-    
+
+
+
             <div class="text-end">
                 <a href="../../controller/cerrar_sessión.php"> <button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button></a>
             </div>
-          </div>
         </div>
-      </header>
-    
-      <div class="py-3 fs-3 "></div>
-      <div class="py-3 fs-3 "></div>
-      <div class="py-3 fs-3 "></div>
+    </div>
+</header>
 
-        <?PHP
+<div class="py-3 fs-3 "></div>
+<div class="py-3 fs-3 "></div>
+<div class="py-3 fs-3 "></div>
+
+<?PHP
 
                     include_once "../../model/conexión.php";
                     $sondeo = $bd->query("select * from Creación_Sondeo where ID = $id;");
                     $r_sondeo = $sondeo->fetchAll(PDO::FETCH_OBJ);
 
-                    $respuestas_usuario = $bd->query("select * from respuestas_usuario where ID_SONDEO = $id;");
+                    $respuestas_usuario = $bd->query("select * from respuestas_usuario where ID_SONDEO = $id AND ID_Usuario = $user;");
                     $c_respuestas_u = $respuestas_usuario->fetchAll(PDO::FETCH_OBJ);
 
                     $c_r_u = count(($c_respuestas_u));
 
                     if($c_r_u > 1){
-
                         ?>
 <div class="container mt-5">
         <div class="row justify-content-center">
@@ -80,18 +79,17 @@
     </div>
 
 
-<?php
+    <?php
 
 
                     }else{
                         foreach($r_sondeo as $dato){
-                    
 
-        ?>
-            
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
+                            ?>
+
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
                 <div class="card">
 
                     <form class="p-4" method="POST" action="../../controller/registrar_respuestas.php">
@@ -99,13 +97,14 @@
 
                         <?php
 
-                            include_once "../../model/conexión.php";
-                            $p_sondeo = $bd->query("select * from pregunta_sondeo where ID_SONDEO = $id;");
-                            $pr_sondeo = $p_sondeo->fetchAll(PDO::FETCH_OBJ);
-                        
-                            foreach($pr_sondeo as $preguntas){
+include_once "../../model/conexión.php";
+$p_sondeo = $bd->query("select * from pregunta_sondeo where ID_SONDEO = $id;");
+$pr_sondeo = $p_sondeo->fetchAll(PDO::FETCH_OBJ);
 
-                            
+foreach($pr_sondeo as $preguntas){
+
+
+    
 
                         ?>
 
