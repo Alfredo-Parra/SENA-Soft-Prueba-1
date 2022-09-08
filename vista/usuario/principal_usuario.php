@@ -21,6 +21,8 @@
 
 <body style="background: #EEEDEA">
 
+
+                
   <header class="p-3 bg-primary text-white">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -41,7 +43,7 @@
 
 
         <div class="text-end">
-          <a href="../../controller/cerrar_sessión.php"><button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button>
+          <a href="../../controller/cerrar_sessión.php"><button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button></a>
         </div>
       </div>
     </div>
@@ -53,7 +55,7 @@
 
   <div class="container ">
     <div class="row justify-content-center">
-      <div class="col">
+      
 
 
 
@@ -70,16 +72,14 @@
           $fecha_inicio = $dato->fecha_inicio;
           $fecha_final = $dato->fecha_final;
 
-          if ($fecha_actual < $fecha_inicio) {
-          }
+          
           if ($fecha_actual >= $fecha_inicio && $fecha_actual <= $fecha_final) {
             $contador = count($r_sondeo);
 
 
-
         ?>
 
-
+        <div class="col">
             <div class="row row-cols-1 row-cols-md-2 g-4">
               <div class="col">
                 <div class="card">
@@ -94,17 +94,34 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <?php
+          }else{
+            ?>
+
+            <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header bg-primary text-center text-light fs-3">
+                        No hay encuestas para tí en estos momentos
+                      </div>
+                      <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                          <p>Puedes esperar o revisar las encuestas que hayas realizado anteriormente</p>
+                          <footer class="blockquote-footer">ATT <cite title="Source Title">Encuesta Social</cite></footer>
+                        </blockquote>
+                      </div>
+                    </div>
+              </div>
 
 
           <?php
-          } else {
           }
         }
-          ?>
+        
 
-            </div>
-      </div>
-    </div>
+        ?>
+
+          
   </div>
   </div>
 
