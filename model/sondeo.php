@@ -5,19 +5,67 @@ include "conexión.php";
 class sondeo
 {
 
-  public function agregar_sondeo($tp, $nd, $nc, $a, $s, $tc, $tf, $ce, $m, $dir, $bv, $fn, $e, $cd, $er, $unv, $ade, $de, $ci)
+  public function agregar_sondeo($fi,$ff,$r,$t)
   {
-    $proceso = $GLOBALS['bd']->prepare("INSERT INTO `usuario` (`Tipo_Documento`, `Número de Documento`, `Nombres Completos`, `Apellidos`, `Sexo`, `Teléfono_Celular`, `Teléfono_Fijo`, `Correo_Electrónico`, `Municipio`, `Dirección`, `Barrio-Vereda`, `Fecha_Nacimiento`, `Etnia`, `Condición_Discapacidad`, `Estrato_Residencia`, `U_Nivel_Educativo`, `Acceso_Dispositivos_E`, `Dispositivos_Tecnológicos`, `Conectividad_Internet`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $resultado = $proceso->execute([$tp, $nd, $nc, $a, $s, $tc, $tf, $ce, $m, $dir, $bv, $fn, $e, $cd, $er, $unv, $ade, $de, $ci]);
+    $proceso = $GLOBALS['bd']->prepare("INSERT INTO creación_sondeo (fecha_inicio,fecha_final,Restricción,Tema) VALUES (?,?,?,?)");
+    $resultado = $proceso->execute([$fi,$ff,$r,$t]);
+    
 
     if ($resultado === TRUE) {
-      header("Location: ../vista/inicioU.html");
-      exit();
+
+      $sondeo = new sondeo();
+      $sondeo->obtener_id($fi,$ff,$r,$t);
+
+
+    
     } else {
       header("Location: ../vista/resgistrar_usuario.html?mensaje=error");
       exit();
     }
   }
+
+  public function obtener_id($fi,$ff,$r,$t){
+    $proceso = $GLOBALS['bd']->query("SELECT * FROM creación_sondeo WHERE fecha_inicio = '$fi' AND fecha_final = '$ff' AND Tema = '$t'; ");
+    $rs = $proceso->fetchAll(PDO::FETCH_OBJ);
+    foreach($rs as $dato){
+      $ID = $dato->ID;
+     header("Location: ../vista/administrador/añadir_preguntas.php?ID=$ID");
+     exit();
+    }
+    
+
+    
+    
 }
 
+  public function añadir_pregunta($id_sondeo,$pr){
+
+    $proceso = $GLOBALS['bd']->prepare("INSERT INTO pregunta_sondeo (ID_SONDEO, Pregunta) VALUES (?,?)");
+    $resultado = $proceso->execute([$id_sondeo,$pr]);
+
+  }
+
+  public function obtener_id_pregunta($id_sondeo,$pr){
+
+    $PROCESO = $GLOBALS['bd']->query("SELECT * FROM pregunta_sondeo WHERE ID_SONDEO = $id_sondeo AND Pregunta = '$pr';");
+    $rs = $PROCESO->fetchAll(PDO::FETCH_OBJ);
+
+    foreach($rs as $dato){
+      return $dato->ID;
+    }
+    
+  }
+
+  public function añadir_respuesta($id_pregunta,$res){
+
+    $proceso = $GLOBALS['bd']->prepare("INSERT INTO respuestas_preguntas_sondeo (ID_Pregunta,Respuesta) VALUES (?,?);");
+    $rs = $proceso->execute([$id_pregunta,$res]);
+
+  }
+
+
+}
+
+
+ 
 ?>

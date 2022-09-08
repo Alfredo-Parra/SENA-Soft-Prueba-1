@@ -36,15 +36,67 @@
           <li><a href="#" class="nav-link px-2 text-white">Resultados Sondeo</a></li>
 
         </ul>
-
-
-
         <div class="text-end">
-          <a href="../../controller/cerrar_sessión.php"><button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button>
+          <a href="../../controller/cerrar_sessión.php"><button type="button" class="btn btn-warning">Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></button></a>
         </div>
       </div>
     </div>
   </header>
+
+
+        <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                <form class="p-4" method="POST" action="../../controller/crear_sondeo.php">
+              
+                <div class="mg-3">
+                     <label class="form-label  fs-4">Tema de la encuesta</label>
+                     <input type="text" class="form-control" name="tema" autofocus required>
+                </div>
+
+                <div class="mg-3">
+                     <label class="form-label  fs-4">Fecha Inicio</label>
+                     <input type="datetime-local" step="1" class="form-control" name="fecha_i" autofocus required>
+                </div>
+
+                <div class="mg-3">
+                     <label class="form-label  fs-4">Fecha Final</label>
+                     <input type="datetime-local" step="1" class="form-control" name="fecha_f" autofocus required>
+                </div>
+
+                <div class="mg-3">
+                     <label class="form-label  fs-4">Restricción</label>
+                     <input type="text" class="form-control" name="restricción" autofocus required>
+                </div>
+
+
+
+
+                <p>
+                  <p>
+
+                  </p>
+                </p>
+
+                <div class="form-footer">
+                            <div class="d-grid">
+                                <input type="hidden" name="oculto" value="1">
+                                <input type="submit" class="btn btn-primary text-white fs-4" value="Siguiente">
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+        
 
   <div class="py-3 fs-3 "></div>
   <div class="py-3 fs-3 "></div>
