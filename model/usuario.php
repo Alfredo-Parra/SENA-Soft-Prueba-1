@@ -57,6 +57,24 @@ class usuario{
     Public function registrar_respuesta($is,$iu,$ip,$ir){
         $registrar = $GLOBALS['bd']->prepare("INSERT INTO respuestas_usuario (ID_SONDEO, ID_USUARIO, ID_Pregunta, Respuesta) VALUES (?,?,?,?)");
         $resultado = $registrar->execute([$is,$iu,$ip,$ir]);
+
+    }
+
+    
+    public function buscar_certificado($radicado){
+
+        $certificado = $GLOBALS['bd']->query("SELECT id_usuario, id_sondeo FROM radicados where CONCAT(radicado, LPAD(id, 4, '0')) = $radicado");
+        $resultado = $certificado->fetchAll(PDO::FETCH_OBJ);
+
+        // $contador = count($resultado);
+
+        // if($contador > 0){
+        //     header ('Location: ../../vista/usuario/crear_usuario.html');
+        // }else{
+        //     header ('Location: index.html?mensaje=error');
+        // }
+        return $resultado;
+
     }
 
 }
