@@ -81,7 +81,7 @@ foreach ($r_sondeo as $dato) {
             <p class="text-center text-primary">-----------------------------</p>
 
           
-            <div class="card-footer bg-transparent border-primary text-end"><a href="../../generar_pdf.php?ID=<?php echo $dato->ID ?>"><button class="btn btn-primary text-light">Generar Radicado</button></a></div>
+            <div class="card-footer bg-transparent border-primary text-end"><a href="../../controller/verificación_radicado.php?ID=<?php echo $dato->ID ?>"><button class="btn btn-primary text-light">Generar Radicado</button></a></div>
           </div>
         </div>
       </div>

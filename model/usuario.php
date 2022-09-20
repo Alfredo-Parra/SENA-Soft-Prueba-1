@@ -91,6 +91,60 @@ class usuario{
 
     }
 
+    public function verificacion_radicado($id_sondeo,$id_usuario){
+
+    
+
+        $inicio = $GLOBALS['bd']->query("Select * FROM radicados where id_sondeo = $id_sondeo AND id_usuario = $id_usuario; ");
+        $resultado = $inicio->fetchAll(PDO::FETCH_OBJ);
+
+        $rel = count($resultado);
+
+        if($rel > 0){
+
+            $radicado = $GLOBALS['bd']->query("Select CONCAT(radicado,LPAD(ID,4,'0')) radicado FROM radicados where id_sondeo = $id_sondeo AND id_usuario = $id_usuario; ");
+            $peticion = $radicado->fetchALL(PDO::FETCH_OBJ);
+
+            foreach($peticion as $dato){
+
+                $RADICADO = $dato->radicado;
+                
+                return $RADICADO;
+
+            }
+
+            
+
+        }else{
+
+                
+                $this->crear_radicado($id_sondeo,$id_usuario);
+
+
+
+        }
+
+        
+        
+
+
+
+    }
+
+
+
+
+    public function crear_radicado($id_sondeo,$id_usuario){
+
+        $inicio = $GLOBALS['bd']->prepare("INSERT INTO radicados (id_sondeo, id_usuario) VALUES (?,?); ");
+        $resultado = $inicio->execute([$id_sondeo,$id_usuario]);
+
+        if($resultado == 1){
+            return 1;
+        }
+
+    }
+
 
     public function agregar_participación($id_sondeo,$id_usuario,$fecha){
 

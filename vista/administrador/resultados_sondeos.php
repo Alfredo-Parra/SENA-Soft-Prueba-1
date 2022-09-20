@@ -36,6 +36,85 @@
           <li><a href="resultados_sondeos.php" class="nav-link px-2 text-white">Resultados Sondeo</a></li>
 
         </ul>
+      </div>
+    </div>
+  </header>
+
+  <p>
+    <p>
+
+    </p>
+  </p>
+
+        <div class="container ">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="card border-primary text-primary text-center">
+          <div class="card-header fs-4 bg-primary text-light">
+            Sondeos Finalizados
+          </div>
+          <div class="p-4">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Fecha de Inicio</th>
+                  <th scope="col">Fecha Final</th>
+                  <th scope="col">Restricción</th>
+                  <th scope="col">Generar Reporte</th>
+                </tr>
+              </thead>
+
+
+
+
+
+
+              <?php
+
+              include_once "../../model/conexión.php";
+              $sondeo = $bd->query("select * from Creación_Sondeo");
+              $r_sondeo = $sondeo->fetchAll(PDO::FETCH_OBJ);
+
+               foreach ($r_sondeo as $dato) {
+                date_default_timezone_set("America/Bogota");
+              
+                $fecha_actual = date("Y-m-d H:i:00", time());
+                $fecha_inicio = $dato->fecha_inicio;
+                $fecha_final = $dato->fecha_final;
+              
+                
+                if ($fecha_actual > $fecha_final) {
+                  
+              
+              
+              ?>
+
+
+
+
+
+                <tbody>
+                  <tr>
+                    <th scope="row"><?php echo $dato->ID; ?></th>
+                    <td><?php echo $dato->fecha_inicio; ?></td>
+                    <td><?php echo $dato->fecha_final; ?></td>
+                    <td><?php echo $dato->Restricción; ?></td>
+                    <td><a href=""><button class="btn btn-primary text-light">Generar</button></a></td>
+                  </tr>
+
+                <?php
+              }
+            }
+          
+                ?>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
 
 
 
